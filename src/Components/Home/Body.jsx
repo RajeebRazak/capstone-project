@@ -16,11 +16,11 @@ function Footer() {
 
   const handleFormSubmit = (values, actions) => {
     console.log("Form submitted with values:", values);
-    // Custom logic after form submission
+   /*  // Custom logic after form submission */
     alert("Form submitted successfully!");
-    // Reset the form after submission
+   /*  // Reset the form after submission */
     actions.resetForm();
-    // Close the popup
+    /* // Close the popup */
     setPopupOpen(false);
   };
   return (

@@ -26,7 +26,7 @@ const Login = () => {
         email: values.email,
         password: values.password,
       });
-      // Assuming your backend returns a success message upon successful login
+     /*  // Assuming your backend returns a success message upon successful login */
       console.log("Response from server", response.data);
       alert("Login Successful");
   
@@ -37,11 +37,11 @@ const Login = () => {
       if (userRole === "admin") {
         navigate("/admin");
       } else {
-        // Redirect to home page upon successful login
+     /*    // Redirect to home page upon successful login */
         navigate('/');
       }
     } catch (error) {
-      // Handle error such as displaying error message to the user
+     /*  // Handle error such as displaying error message to the user */
       console.error('Login error:', error);
       if (error.response) {
         console.log('Server Error:', error.response.data);

@@ -10,8 +10,8 @@ function CustomNavbar() {
 
   const handleLogout =  () => {
     try {
-      // Perform logout actions, e.g., clearing local storage, redirecting to login page, etc.
-      //localStorage.removeItem("token");
+      /* Perform logout actions, e.g., clearing local storage, redirecting to login page, etc.
+      localStorage.removeItem("token"); */
       console.log("logged out")
       navigate("/login");
     } catch (error) {

@@ -13,7 +13,7 @@ function Admin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch data from backend API
+    /* Fetch data from backend API */
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3004/form/forms");
@@ -39,15 +39,15 @@ function Admin() {
       setFormData(updatedFormData);
       console.log(updatedFormData[index]);
 
-      // Update the status in backend data
-      const serviceIdToUpdate = updatedFormData[index].serviceId; // Get the serviceId of the form entry
+      /* Update the status in backend data */
+      const serviceIdToUpdate = updatedFormData[index].serviceId; /* Get the serviceId of the form entry */
       const response = await axios.put(
         `http://localhost:3004/admin/forms/${serviceIdToUpdate}`,
         {
           status: "approved",
         }
       );
-      // Update only the status in formData with the response status
+     /*  // Update only the status in formData with the response status */
       const updatedFormDataWithStatus = updatedFormData.map((item, i) =>
         i === index ? { ...item, status: response.data.status } : item
       );
@@ -59,8 +59,8 @@ function Admin() {
 
   const handleLogout = () => {
     try {
-      // Perform logout actions, e.g., clearing local storage, redirecting to login page, etc.
-      //localStorage.removeItem("token");
+      /* // Perform logout actions, e.g., clearing local storage, redirecting to login page, etc.
+      //localStorage.removeItem("token"); */
       console.log("logged out");
       navigate("/login");
     } catch (error) {

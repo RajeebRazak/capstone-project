@@ -8,7 +8,7 @@ function Service() {
   const [formData, setFormData] = useState([]);
 
   useEffect(() => {
-    // Fetch data from backend API
+    /* // Fetch data from backend API */
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3004/form/forms");
@@ -19,7 +19,7 @@ function Service() {
       }
     };
     fetchData();
-  }, []); // Empty dependency array ensures this effect runs only once after initial
+  }, []);/*  // Empty dependency array ensures this effect runs only once after initial */
 
  
 

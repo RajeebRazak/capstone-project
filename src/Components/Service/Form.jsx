@@ -24,7 +24,7 @@ function Cusform() {
 
   const onSubmit = async (values) => {
     try {
-      // Send the form data to the backend using axios.
+     /*  // Send the form data to the backend using axios. */
       const response = await axios.post(
         "http://localhost:3004/form/forms/submit",
         values
