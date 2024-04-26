@@ -3,8 +3,6 @@
 import React from "react";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
 
 function CustomNavbar() {
   
