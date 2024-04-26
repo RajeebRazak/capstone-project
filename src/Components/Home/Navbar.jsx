@@ -7,35 +7,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function CustomNavbar() {
-  const [firstName, setFirstName] = useState("");
+  
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchFirstName = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          throw new Error("Token not found");
-        }
-        // Fetch the first's name from the database
-        const response = await axios.get("http://localhost:3001/auth/signup", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setFirstName(response.data.firstName);
-      } catch (error) {
-        console.error("Error fetching first name", error);
-        // Handle error gracefully, e.g., redirect to login page if unauthorized
-        if (error.response && error.response.status === 401) {
-          navigate("/login");
-        }
-      }
-    };
-
-    // Call the fetchFirstName function when the component mounts
-    fetchFirstName();
-  }, [navigate]);
 
   const handleLogout =  () => {
     try {
@@ -74,13 +47,7 @@ function CustomNavbar() {
               Service cost
             </Nav.Link>
           </Nav>
-          {firstName && (
-            <Nav className="hidden sm:block">
-              <Navbar.Text className="text-light">
-                Welcome, {firstName}!
-              </Navbar.Text>
-            </Nav>
-          )}
+          
           <Nav>
             <Button
               className="ml-md-auto"
