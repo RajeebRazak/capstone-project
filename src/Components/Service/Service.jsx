@@ -11,7 +11,7 @@ function Service() {
     /* // Fetch data from backend API */
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3004/form/forms");
+        const response = await axios.get("https://capstone-backend-h5zz.onrender.com/form/forms");
         console.log("Response data:", response.data);
         setFormData(response.data);
       } catch (error) {

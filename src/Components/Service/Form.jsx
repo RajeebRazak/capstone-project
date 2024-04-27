@@ -26,7 +26,7 @@ function Cusform() {
     try {
      /*  // Send the form data to the backend using axios. */
       const response = await axios.post(
-        "http://localhost:3004/form/forms/submit",
+        "https://capstone-backend-h5zz.onrender.com/form/forms/submit",
         values
       );
       console.log("Response from server", response.data);
