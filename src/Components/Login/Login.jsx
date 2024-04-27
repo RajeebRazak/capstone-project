@@ -29,9 +29,17 @@ const Login = () => {
       
       console.log("Response from server", response.data);
       alert("Login Successful");
-
-      // Redirect to home page upon successful login
-      navigate('/');
+       
+      const userRole = response.data.role;
+      console.log(userRole);
+      console.log(response.data);
+      
+      if (userRole === "admin") {
+        navigate("/admin");
+      } else {
+     /*    // Redirect to home page upon successful login */
+        navigate('/');
+      }
     } catch (error) {
       console.error('Login error:', error);
       if (error.response) {
