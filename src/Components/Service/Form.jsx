@@ -5,40 +5,45 @@ import { useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../Loading";
+import Toast, { showToast } from "../Toast";
 
 function Cusform() {
-  const [formData, setFormData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const SignupSchema = Yup.object().shape({
+    // Validation Schema
     dateofbooking: Yup.string().required("Required"),
     categoryofvehicle: Yup.string().required("Required"),
     bikemodel: Yup.string().required("Required"),
     year: Yup.string().required("Required"),
     typeofservice: Yup.string().required("Required"),
-    customerComplaint: Yup.string().min(1,
+    customerComplaints: Yup.string().min(
+      1,
       "At least one complaint is required"
     ),
   });
 
   const onSubmit = async (values) => {
+    setLoading(true); // Start loading when form is submitted
     try {
-     /*  // Send the form data to the backend using axios. */
-      const response = await axios.post(
-        "https://capstone-backend-h5zz.onrender.com/form/forms/submit",
-        values
-      );
-      console.log("Response from server", response.data);
-      alert("Service booked successfully");
+      // Send the form data to the backend using axios
+      const response = await axios.post("http://localhost:3004/form/forms/submit", values);
+      // if (response.status >= 200 && response.status < 300) {
+      //   throw new Error("Failed to Submit booking")
+      // }
+      showToast("Service booked successfully", "success"); // Call the showToast function
       navigate("/service");
-      console.log("Form reset completed");
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("service booking failed. Please try again");
+      showToast("Service booking failed. Please try again", "error"); // Call the showToast function
+    } finally {
+      setLoading(false); // Stop loading after request is completed
     }
   };
-
+  
   return (
     <Formik
       initialValues={{
@@ -53,6 +58,8 @@ function Cusform() {
       onSubmit={onSubmit}
     >
       <div className="min-w-md mx-auto max-h-screen overflow-center">
+        {/* Conditionally render the loading screen */}
+        {loading && <LoadingScreen />}
         <Form className="flex flex-col space-y-4">
           <div className="mb-0">
             <label htmlFor="dateofbooking" className="block font-bold">
@@ -64,6 +71,7 @@ function Cusform() {
               className="form-input"
               placeholder="Select Booking Date"
               id="dateofbooking"
+              min={new Date().toISOString().substr(0, 10)} // Set minimum date to today's date
             />
             <ErrorMessage
               name="dateofbooking"
@@ -174,19 +182,19 @@ function Cusform() {
               className="text-red-500 text-sm"
             />
 
-            <label htmlFor="customerComplaint" className="block font-bold">
+            <label htmlFor="customerComplaints" className="block font-bold">
               Additional Complaints
             </label>
             <Field
               as="textarea"
               className="form-textarea"
-              name="customerComplaint"
-              id="customerComplaint"
+              name="customerComplaints"
+              id="customerComplaints"
               placeholder="Write Your Additional Complaints"
               rows="5"
             />
             <ErrorMessage
-              name="customerComplaint"
+              name="customerComplaints"
               component="div"
               className="text-red-500 text-sm"
             />

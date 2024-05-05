@@ -4,27 +4,8 @@ import { Pricelist } from "../Price/Pricelist";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
 
 function Cusprice() {
- 
   return (
     <div>
-      <div>
-      <Navbar bg="dark" variant="dark" expand="md">
-      <Container>
-        <Navbar.Brand as={Link} to="/">Hero</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
-            <Nav.Link as={Link} to="/contactus">Contact Us</Nav.Link>
-            <Nav.Link as={Link} to="/service">Service</Nav.Link>
-            <Nav.Link as={Link} to="/gallery">Gallery</Nav.Link>
-            <Nav.Link as={Link} to="/spare"> Spare's</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-      </div>
-
       <section className="py-8 bg-gray-100">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-4">Price List</h2>

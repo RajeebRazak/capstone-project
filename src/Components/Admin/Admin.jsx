@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../Loading";
 
 function Admin() {
   const [formData, setFormData] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState([]);
 
   const navigate = useNavigate();
@@ -17,27 +18,29 @@ function Admin() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3004/form/forms");
-        console.log("Response data", response.data);
+        
         const data = response.data;
         setStatus(response.data);
-        console.log(data);
+        
         setFormData(response.data);
       } catch (error) {
         console.error("Error fetching form data", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
   const handleApproval = async (index, status) => {
-    console.log(status);
+  
 
     try {
       const updatedFormData = formData.map((item, i) =>
         i === index ? { ...item, status: "approved" } : item
       );
       setFormData(updatedFormData);
-      console.log(updatedFormData[index]);
+      
 
       /* Update the status in backend data */
       const serviceIdToUpdate = updatedFormData[index].serviceId; /* Get the serviceId of the form entry */
@@ -61,7 +64,7 @@ function Admin() {
     try {
       /* // Perform logout actions, e.g., clearing local storage, redirecting to login page, etc.
       //localStorage.removeItem("token"); */
-      console.log("logged out");
+     
       navigate("/login");
     } catch (error) {
       console.error("Error logging out", error);
@@ -86,6 +89,10 @@ function Admin() {
           </Nav>
         </Container>
       </Navbar>
+      <div>
+      {loading ? (
+        <LoadingScreen />
+      ) : (
       <div className="container mx-auto">
         <div className="overflow-x-auto">
           <table className="w-full bg-white border border-gray-300 divide-y divide-gray-200">
@@ -148,6 +155,8 @@ function Admin() {
             </tbody>
           </table>
         </div>
+      </div>
+       )}
       </div>
     </>
   );

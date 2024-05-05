@@ -1,63 +1,61 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage, validateYupSchema } from "formik";
 import * as Yup from "yup";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../Images/google.jpg";
 import facebook from "../Images/facebook.png";
 import axios from "axios";
+import LoadingScreen from "../Loading";
+import { useState } from "react";
 
- const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-   .email("Invalid email")
-   .required("Email is required"),
-    password: Yup.string()
-   .min(6, "Password must be at least 6 characters")
-   .required("Password is required"),
-  });
- 
-  
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
+
 const Login = () => {
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  
+
   const onSubmit = async (values, actions) => {
+    setLoading(true); // Start loading when form is submitted
     try {
-      const response = await axios.post("https://capstone-backend-h5zz.onrender.com/auth/login", {
+      const response = await axios.post("http://localhost:3004/auth/login", {
         email: values.email,
         password: values.password,
       });
-      
-      console.log("Response from server", response.data);
+
       alert("Login Successful");
-       
+
       const userRole = response.data.role;
-      console.log(userRole);
-      console.log(response.data);
-      
+
       if (userRole === "admin") {
         navigate("/admin");
       } else {
-     /*    // Redirect to home page upon successful login */
-        navigate('/');
+        navigate("/");
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       if (error.response) {
-        console.log('Server Error:', error.response.data);
-        alert('Login failed. Please check your credentials and try again.');
+       
+        alert("Login failed. Please check your credentials and try again.");
       } else if (error.request) {
-        console.log('Request Error:', error.request);
-        alert('Request failed. Please try again later.');
+       
+        alert("Request failed. Please try again later.");
       } else {
-        console.log('Other Error:', error.message);
-        alert('Login failed. Please try again later.');
+      
+        alert("Login failed. Please try again later.");
       }
+    } finally {
+      setLoading(false); // Stop loading after login attempt
     }
   };
-  
- 
+
   return (
-    <div className="bg-black min-h-screen flex flex-col justify-center items-center">
+    <div className="bg-slate-300 min-h-screen flex flex-col justify-center items-center">
       <Formik
         initialValues={{
           email: "",
@@ -67,6 +65,7 @@ const Login = () => {
         onSubmit={onSubmit}
       >
         <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col max-w-md">
+        {loading && <LoadingScreen />}
           <div className="mb-8 text-3xl font-extrabold text-center text-gray-800">
             Log In
           </div>
@@ -120,7 +119,11 @@ const Login = () => {
                 <img src={google} alt="Google" className="w-8 h-8 rounded" />
               </Link>
               <Link to="">
-                <img src={facebook} alt="Facebook" className="w-8 h-8 rounded" />
+                <img
+                  src={facebook}
+                  alt="Facebook"
+                  className="w-8 h-8 rounded"
+                />
               </Link>
             </div>
           </div>
@@ -129,7 +132,7 @@ const Login = () => {
               to="/register"
               className="text-sm text-blue-500 hover:text-blue-800 mx-1"
             >
-              Create a new account
+             New account
             </Link>
             <Link
               to="/forgot-password"
@@ -142,6 +145,6 @@ const Login = () => {
       </Formik>
     </div>
   );
-}
+};
 
 export default Login;

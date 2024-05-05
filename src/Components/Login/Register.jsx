@@ -3,8 +3,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../Loading";
+import { useState } from "react";
 
 function Register() {
+  const [loading, setLoading] = useState(false);
 
    const navigate = useNavigate();
 
@@ -33,16 +36,19 @@ function Register() {
       });
       
   const onSubmit = async (values) => {
+    setLoading(true); // Start loading when form is submitted
     try{
       /* //send the form data to backend  */
-      const response = await axios.post("https://capstone-backend-h5zz.onrender.com/auth/signup", values);
-      console.log("Response from server",response.data);
+      const response = await axios.post("http://localhost:3004/auth/signup", values);
+      
       alert("Successfully Registered");
       navigate("/login");
     } catch(error) {
     console.error("Error:", error);
     alert("Registration failed. Please try again")
-    }
+  } finally {
+    setLoading(false); // Stop loading after login attempt
+  }
   };
   return (
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
@@ -59,6 +65,7 @@ function Register() {
         onSubmit={onSubmit}
   >
     <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col max-w-md">
+    {loading && <LoadingScreen />}
       <div className="mb-4 text-2xl font-semibold text-center text-blue-500">
         Register
       </div>

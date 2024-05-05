@@ -11,35 +11,6 @@ import { Container, Navbar, Nav } from "react-bootstrap";
 function Gallery() {
   return (
     <>
-      <div>
-        <Navbar bg="dark" variant="dark" expand="md">
-          <Container>
-            <Navbar.Brand as={Link} to="/">
-              Hero
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link as={Link} to="/aboutus">
-                  About Us
-                </Nav.Link>
-                <Nav.Link as={Link} to="/contactus">
-                  Contact Us
-                </Nav.Link>
-                <Nav.Link as={Link} to="/service">
-                  Service
-                </Nav.Link>
-                <Nav.Link as={Link} to="/spare">
-                  Spare's
-                </Nav.Link>
-                <Nav.Link as={Link} to="/price">
-                  Service cost
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-3 ">
         <div className="mb-2">
           <img

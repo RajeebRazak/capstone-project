@@ -5,35 +5,6 @@ import { Link } from "react-router-dom";
 function Aboutus() {
   return (
     <>
-      <div>
-        <Navbar bg="dark" variant="dark" expand="md">
-          <Container>
-            <Navbar.Brand as={Link} to="/">
-              Hero
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link as={Link} to="/contactus">
-                  Contact Us
-                </Nav.Link>
-                <Nav.Link as={Link} to="/gallery">
-                  Gallery
-                </Nav.Link>
-                <Nav.Link as={Link} to="/service">
-                  Service
-                </Nav.Link>
-                <Nav.Link as={Link} to="/spare">
-                  Spare's
-                </Nav.Link>
-                <Nav.Link as={Link} to="/price">
-                  Service cost
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      </div>
       <div className="bg-white-900 text-black">
         <div className="container mx-auto px-4 py-12">
           <div className="flex flex-col lg:flex-row items-center justify-between">
