@@ -39,7 +39,7 @@ function Register() {
     setLoading(true); // Start loading when form is submitted
     try{
       /* //send the form data to backend  */
-      const response = await axios.post("http://localhost:3004/auth/signup", values);
+      const response = await axios.post("https://main--hero-capstone-project.netlify.app/auth/signup", values);
       
       alert("Successfully Registered");
       navigate("/login");

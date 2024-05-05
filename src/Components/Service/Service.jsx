@@ -11,7 +11,7 @@ function Service() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3004/form/forms");
+        const response = await axios.get("https://main--hero-capstone-project.netlify.app/form/forms");
 
         setFormData(response.data);
       } catch (error) {
