@@ -23,7 +23,7 @@ const Login = () => {
   const onSubmit = async (values, actions) => {
     setLoading(true); // Start loading when form is submitted
     try {
-      const response = await axios.post("https://main--hero-capstone-project.netlify.app/auth/login", {
+      const response = await axios.post("https://hero-capstone-project.netlify.app/auth/login", {
         email: values.email,
         password: values.password,
       });
