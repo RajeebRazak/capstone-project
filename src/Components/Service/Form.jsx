@@ -30,7 +30,7 @@ function Cusform() {
     setLoading(true); // Start loading when form is submitted
     try {
       // Send the form data to the backend using axios
-      const response = await axios.post("https://hero-capstone-project.netlify.app/form/forms/submit", values);
+      const response = await axios.post("https://capstone-backend-h5zz.onrender.com/form/forms/submit", values);
       // if (response.status >= 200 && response.status < 300) {
       //   throw new Error("Failed to Submit booking")
       // }

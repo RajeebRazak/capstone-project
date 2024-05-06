@@ -17,7 +17,7 @@ function Admin() {
     /* Fetch data from backend API */
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://hero-capstone-project.netlify.app/form/forms");
+        const response = await axios.get("https://capstone-backend-h5zz.onrender.com/form/forms");
         
         const data = response.data;
         setStatus(response.data);
@@ -45,7 +45,7 @@ function Admin() {
       /* Update the status in backend data */
       const serviceIdToUpdate = updatedFormData[index].serviceId; /* Get the serviceId of the form entry */
       const response = await axios.put(
-        `https://hero-capstone-project.netlify.app/admin/forms/${serviceIdToUpdate}`,
+        `https://capstone-backend-h5zz.onrender.com/admin/forms/${serviceIdToUpdate}`,
         {
           status: "approved",
         }
